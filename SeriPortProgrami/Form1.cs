@@ -99,13 +99,13 @@ namespace SeriPortProgrami
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string dosya = path + "\\"+ fileName + ".txt";
             string kayit = gelenVeri ;
-
-                string[] bolunenKayit = kayit.Split(',');
-                
-                //label1.Text = kayit.Split(',')[0];
-            File.AppendAllText(dosya, bolunenKayit.Length.ToString());
+            if (kayit != "" && !String.IsNullOrEmpty(kayit))
+            {
+                label1.Text = kayit.Split(',')[0];
+            }
+            File.AppendAllText(dosya, kayit);
             //textBoxMessages.Text += gelenVeri;
-            textBoxMessages.Invoke(new veriGoster(texteYaz), bolunenKayit.Length.ToString());
+            textBoxMessages.Invoke(new veriGoster(texteYaz), gelenVeri);
         }
     }
 }
