@@ -15,11 +15,16 @@ namespace SeriPortProgrami
 {
     public partial class Form1 : Form
     {
-        string fileName = DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss");
+        static DateTime baslangic = DateTime.Now;
+        static string fileName = baslangic.ToString("yyyy_MM_dd HH_mm_ss");
+        static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        static string dosya = path + "\\" + fileName + ".csv";
+        static DateTime ilkVeriTarihi = new DateTime();  
 
         public Form1()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,10 +37,8 @@ namespace SeriPortProgrami
             if (comboBoxSeriPortlar.Items.Count > 0){
                 comboBoxSeriPortlar.SelectedIndex = 0;
             }
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-            string dosya = path + "\\" + fileName + ".txt";
-            File.AppendAllText(dosya, "tarih,sicaklik1,sicaklik2,sicaklik3,sicaklik4,sicaklik5 \n");
+            File.AppendAllText(dosya, "zaman_ms;hiz_kmh;T_bat_C;V_bat_C;kalan_enerji_Wh \r\n");
 
 
         }
@@ -56,7 +59,8 @@ namespace SeriPortProgrami
             catch (Exception ex)
             {
 
-                MessageBox.Show($"Seri port bağlantısı yapılamadı\n Hata : {ex.Message}","Problem",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show($"Seri port bağlantısı yapılamadı\n Hata : {ex.Message}"
+                    ,"Sorun",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             
             if (serialPort1.IsOpen)
@@ -95,17 +99,34 @@ namespace SeriPortProgrami
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            String gelenVeri = DateTime.Now.ToString("yy-MM-dd HH:mm:ss,") + serialPort1.ReadExisting();
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string dosya = path + "\\"+ fileName + ".txt";
+            DateTime zamanDamgasi = DateTime.Now;
+            if (ilkVeriTarihi == DateTime.MinValue)
+            {
+                ilkVeriTarihi = zamanDamgasi;
+            }
+            Double zamanFarki = (zamanDamgasi - ilkVeriTarihi).TotalMilliseconds;
+            String gelenVeri = (int)zamanFarki + ";" + serialPort1.ReadExisting();
+            gelenVeri += Environment.NewLine;
             string kayit = gelenVeri ;
             if (kayit != "" && !String.IsNullOrEmpty(kayit))
             {
-                label1.Text = kayit.Split(',')[0];
+                string[] bolunenKayit = kayit.Split(';');
+
+                if (bolunenKayit.Length >= 5)
+                {
+
+                    File.AppendAllText(dosya, kayit);
+                    zamanText.Text = zamanDamgasi.ToString("HH:mm:ss");
+                    hizText.Text = bolunenKayit[1];
+                    sicaklikText.Text = bolunenKayit[2];
+                    gerilimText.Text = bolunenKayit[3];
+                    enerjiText.Text = bolunenKayit[4];
+                    //textBoxMessages.Text += gelenVeri;
+                    textBoxMessages.Invoke(new veriGoster(texteYaz), gelenVeri);
+                }
             }
-            File.AppendAllText(dosya, kayit);
-            //textBoxMessages.Text += gelenVeri;
-            textBoxMessages.Invoke(new veriGoster(texteYaz), gelenVeri);
         }
+
+
     }
 }

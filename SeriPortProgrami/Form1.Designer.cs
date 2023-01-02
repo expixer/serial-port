@@ -37,7 +37,16 @@
             this.textBoxMessages = new System.Windows.Forms.TextBox();
             this.textBoxMyMessage = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.zamanText = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.sicaklikText = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.hizText = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.gerilimText = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.enerjiText = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxSeriPortlar
@@ -81,16 +90,70 @@
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
-            // label1
+            // zamanText
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.zamanText, "zamanText");
+            this.zamanText.Name = "zamanText";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // sicaklikText
+            // 
+            resources.ApplyResources(this.sicaklikText, "sicaklikText");
+            this.sicaklikText.Name = "sicaklikText";
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // hizText
+            // 
+            resources.ApplyResources(this.hizText, "hizText");
+            this.hizText.Name = "hizText";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // gerilimText
+            // 
+            resources.ApplyResources(this.gerilimText, "gerilimText");
+            this.gerilimText.Name = "gerilimText";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // enerjiText
+            // 
+            resources.ApplyResources(this.enerjiText, "enerjiText");
+            this.enerjiText.Name = "enerjiText";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.enerjiText);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.gerilimText);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.hizText);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.sicaklikText);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.zamanText);
             this.Controls.Add(this.textBoxMessages);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxMyMessage);
@@ -113,7 +176,16 @@
         private System.Windows.Forms.TextBox textBoxMessages;
         private System.Windows.Forms.TextBox textBoxMyMessage;
         private System.Windows.Forms.Button buttonSend;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label zamanText;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label sicaklikText;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label hizText;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label gerilimText;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label enerjiText;
     }
 }
 
